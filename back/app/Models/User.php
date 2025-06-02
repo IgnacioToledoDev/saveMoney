@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\HasName;
 
 /**
  * @property mixed $email
  */
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasName
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -108,5 +109,13 @@ class User extends Authenticatable implements FilamentUser
     public function goals(): HasMany
     {
         $this->hasMany(Goal::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilamentName(): string
+    {
+        return "{$this->firstname} {$this->lastname}";
     }
 }
