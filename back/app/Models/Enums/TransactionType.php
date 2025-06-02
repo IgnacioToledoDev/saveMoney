@@ -7,7 +7,7 @@ enum TransactionType: string
     case INCOME = 'income';
     case EXPENSE = 'expense';
 
-    public function getLabels(): string
+    public function getLabel(): string
     {
         return match ($this) {
             self::INCOME => 'Ingreso',

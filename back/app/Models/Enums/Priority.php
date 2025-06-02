@@ -7,7 +7,7 @@ enum Priority: string
     case MEDIUM = 'medium';
     case HIGH = 'high';
 
-    public function getLabels(): string
+    public function getLabel(): string
     {
         return match ($this) {
             self::LOW => "Bajo",
