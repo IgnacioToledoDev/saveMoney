@@ -13,7 +13,9 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\HasName;
 
 /**
- * @property mixed $email
+ * @property string $email
+ * @property string $firstname
+ * @property string $lastname
  */
 class User extends Authenticatable implements FilamentUser, HasName
 {
@@ -65,12 +67,13 @@ class User extends Authenticatable implements FilamentUser, HasName
     }
 
     /**
+     * TODO: has been has role to access in the panel
      * @param Panel $panel
      * @return bool
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return str_ends_with($this->email, '@savemoney.cl');
+        return !empty($this->email) && !empty($this->password);
     }
 
     /**
@@ -106,10 +109,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     /**
      * @return HasMany
      */
-    public function goals(): HasMany
-    {
-        $this->hasMany(Goal::class);
-    }
+
 
     /**
      * @return string
@@ -117,5 +117,26 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function getFilamentName(): string
     {
         return "{$this->firstname} {$this->lastname}";
+    }
+
+    protected function accounts(): HasMany{
+        return $this->hasMany(Accounts::class);
+    }
+
+    protected function transactions(): HasMany {
+        return $this->hasMany(Transaction::class);
+    }
+    public function goals(): HasMany
+    {
+        return $this->hasMany(Goal::class);
+    }
+    protected function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    protected function accountsUsers(): HasMany
+    {
+        return $this->hasMany(AccountsUsers::class, 'user_id', 'id');
     }
 }

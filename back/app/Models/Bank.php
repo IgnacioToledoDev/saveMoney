@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\NameTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bank extends Model
 {
@@ -17,8 +17,8 @@ class Bank extends Model
       'name'
     ];
 
-    public function cards(): BelongsTo
+    public function accounts(): HasMany
     {
-        return $this->belongsTo(Card::class, 'bank_id', 'id');
+        return $this->hasMany(Accounts::class);
     }
 }

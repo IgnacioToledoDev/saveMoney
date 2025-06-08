@@ -6,6 +6,7 @@ use App\Models\Enums\Category;
 use App\Models\Enums\TransactionType;
 use App\Models\Traits\NameTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
@@ -19,9 +20,10 @@ class Transaction extends Model
         'category',
         'amount',
         'type',
-        'is_recurrent',
         'created_at',
         'updated_at',
+        'account_id',
+        'user_id',
     ];
 
     protected function casts(): array
@@ -32,5 +34,13 @@ class Transaction extends Model
             'category' => Category::class,
             'amount' => 'float',
         ];
+    }
+
+    public function accounts(): BelongsTo {
+        return $this->belongsTo(Accounts::class, 'account_id', 'id');
+    }
+
+    public function users(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
