@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriptionsResource\Pages;
 use App\Filament\Resources\SubscriptionsResource\RelationManagers;
+use App\Models\Subscription;
 use App\Models\Subscriptions;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,9 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubscriptionsResource extends Resource
 {
-    protected static ?string $model = Subscriptions::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $model = Subscription::class;
+    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
+    protected static ?string $navigationLabel = 'Suscripciones';
 
     public static function form(Form $form): Form
     {
@@ -60,5 +62,10 @@ class SubscriptionsResource extends Resource
             'create' => Pages\CreateSubscriptions::route('/create'),
             'edit' => Pages\EditSubscriptions::route('/{record}/edit'),
         ];
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Suscripciones';
     }
 }

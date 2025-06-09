@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GoalsResource\Pages;
 use App\Filament\Resources\GoalsResource\RelationManagers;
+use App\Models\Goal;
 use App\Models\Goals;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,9 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GoalsResource extends Resource
 {
-    protected static ?string $model = Goals::class;
+    protected static ?string $model = Goal::class;
+    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationIcon = 'heroicon-o-flag';
+    protected static ?string $navigationLabel = 'Metas';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -60,5 +63,9 @@ class GoalsResource extends Resource
             'create' => Pages\CreateGoals::route('/create'),
             'edit' => Pages\EditGoals::route('/{record}/edit'),
         ];
+    }
+    public static function getPluralLabel(): ?string
+    {
+        return 'Metas';
     }
 }

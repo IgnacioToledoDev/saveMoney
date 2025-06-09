@@ -16,8 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AccountsResource extends Resource
 {
     protected static ?string $model = Accounts::class;
+    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationLabel = 'Tarjetas';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form
     {
@@ -60,5 +62,10 @@ class AccountsResource extends Resource
             'create' => Pages\CreateAccounts::route('/create'),
             'edit' => Pages\EditAccounts::route('/{record}/edit'),
         ];
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return 'Tarjetas';
     }
 }

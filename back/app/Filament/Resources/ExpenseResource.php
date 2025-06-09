@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExpenseResource\Pages;
 use App\Filament\Resources\ExpenseResource\RelationManagers;
+use App\Models\Enums\TransactionType;
 use App\Models\Expense;
+use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +17,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExpenseResource extends Resource
 {
-    protected static ?string $model = Expense::class;
+    protected static ?string $model = Transaction::class;
+    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationLabel = 'Gastos';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form
     {
@@ -60,5 +64,20 @@ class ExpenseResource extends Resource
             'create' => Pages\CreateExpense::route('/create'),
             'edit' => Pages\EditExpense::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Function to get in this resource only transaction of the type @expense
+     * @return Builder
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('type', TransactionType::EXPENSE->value);
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Gastos';
     }
 }

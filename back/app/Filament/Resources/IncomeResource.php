@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\IncomeResource\Pages;
 use App\Filament\Resources\IncomeResource\RelationManagers;
+use App\Models\Enums\TransactionType;
 use App\Models\Income;
+use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class IncomeResource extends Resource
 {
-    protected static ?string $model = Income::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $model = Transaction::class;
+    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+    protected static ?string $navigationLabel = 'Ingresos';
 
     public static function form(Form $form): Form
     {
@@ -60,5 +63,19 @@ class IncomeResource extends Resource
             'create' => Pages\CreateIncome::route('/create'),
             'edit' => Pages\EditIncome::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Function to get in this resource only transaction of the type @income
+     * @return Builder
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('type', TransactionType::INCOME->value);
+    }
+    public static function getPluralLabel(): ?string
+    {
+        return 'Ingresos';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Enums\CardType;
+use App\Models\Enums\AccountType;
 use App\Models\Traits\NameTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,7 +34,7 @@ class Accounts extends Model
             'has_credit_line' => 'boolean',
             'has_reminder' => 'boolean',
             'expiration_date' => 'datetime:m-Y',
-            'category' => CardType::class,
+            'category' => AccountType::class,
             'balance' => 'float',
             'bank_id' => 'integer',
         ];

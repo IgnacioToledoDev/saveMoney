@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Enums;
-enum    CardType: string
+enum AccountType: string
 {
     case DEBIT = 'debit';
     case CREDIT = 'credit';
@@ -12,8 +12,8 @@ enum    CardType: string
     public function getLabel(): string
     {
         return match ($this) {
-            self::DEBIT => "Debito",
-            self::CREDIT => 'Credito',
+            self::DEBIT => "Débito",
+            self::CREDIT => 'Crédito',
             self::CASH => 'Efectivo',
             self::BANK_ACCOUNT => 'Cuanta Bancaria',
             self::DIGITAL_WALLET => 'Billetera digital',
