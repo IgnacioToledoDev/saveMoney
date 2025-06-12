@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GoalsResource\Pages;
 use App\Filament\Resources\GoalsResource\RelationManagers;
+use App\Models\Enums\FilamentCategoryMenu;
 use App\Models\Goal;
 use App\Models\Goals;
 use Filament\Forms;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class GoalsResource extends Resource
 {
     protected static ?string $model = Goal::class;
-    protected static ?string $navigationGroup = 'Panel';
+    protected static ?string $navigationGroup = FilamentCategoryMenu::MAIN_PANEL->value;
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?string $navigationLabel = 'Metas';
 

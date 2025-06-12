@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Helper\FormHelper;
 use App\Models\Enums\AvailableLanguages;
+use App\Models\Enums\FilamentCategoryMenu;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
@@ -27,10 +28,9 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
     protected static ?string $navigationLabel = 'Usuarios';
-    protected static ?string $navigationGroup = 'Administracions';
+    protected static ?string $navigationGroup = FilamentCategoryMenu::ADMINISTRATION->value;
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    /** I don't understand this function */
     public static function infolists(Infolist $infoList): Infolist
     {
         return $infoList
