@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Enums;
-enum Frequency: string
+enum SubscriptionFrequency: string
 {
     case DAILY = 'daily';
     case WEEKLY = 'weekly';
