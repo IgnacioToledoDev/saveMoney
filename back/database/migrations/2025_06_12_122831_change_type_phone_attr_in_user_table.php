@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Enums\SubscriptionFrequency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('cards', 'accounts');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone')->nullable()->change();
+        });
     }
 
     /**
@@ -20,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::rename('accounts', 'cards');
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('phone')->change();
+        });
     }
 };
